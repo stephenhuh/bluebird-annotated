@@ -1,6 +1,7 @@
 "use strict";
 module.exports = function() {
 var makeSelfResolutionError = function () {
+  //[Reference for TypeError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError)
     return new TypeError(CIRCULAR_RESOLUTION_ERROR);
 };
 var reflectHandler = function() {
@@ -31,6 +32,11 @@ util.notEnumerableProp(Promise, "_getDomain", getDomain);
 var es5 = require("./es5");
 var Async = require("./async");
 var async = new Async();
+//TODO read more on defineProperty and descriptors
+//**->** Difference between accessor and data descriptors
+//**A** 
+//
+//Define on the Promise property the "_async" property, with a data descriptor value of just async
 es5.defineProperty(Promise, "_async", {value: async});
 var errors = require("./errors");
 var TypeError = Promise.TypeError = errors.TypeError;
